@@ -1,7 +1,9 @@
 % !TEX encoding = cp1250
 
 \chapter{Sygna³y zaszumione}
-Program do generowania sygna³u zaszumionego, a nastêpnie jego odszumiania zosta³ umieszczony poni¿ej:
+Program do generowania sygna³u zaszumionego, a nastêpnie jego odszumiania razem z komentarzami zosta³ umieszczony poni¿ej:
+
+Stworzenie sygna³u oryginalnego z szumem:
 
 \begin{lstlisting}
 % Parametry systemu
@@ -16,14 +18,17 @@ A = [1.0   0.4  0.8] % Amplitudy kolejnych sinusoid
 B = [ 15    27   83] % Czêstotliwoœci kolejnych sygna³ów [Hz]
 C = [  0 -pi/3 pi/7] % Przesuniêcia fazowe kolejnych sygna³ów
 
-
 x = zeros(size(t));
 for i = 1:N
   x = x + A(i) * cos(2 * pi * B(i) * t + C(i));
 end
 x_orig = x;
 x=x+randn(size(t))/3;
+\end{lstlisting}
 
+Wyznaczenie transformaty Fouriera i dostosowanie danych:
+
+\begin{lstlisting}
 Y = fft(x);     % transformata Fouriera
 
 A = abs(Y);     % amplituda sygna³u
@@ -37,14 +42,22 @@ F = F(1:L/2+1); % wyciêcie istotnej czêœci spektrum
 
 f_step = Fs/L;     % zmiana czêstotliwoœci
 f = 0:f_step:Fs/2; % oœ czêstotliwoœci do wykresu
+\end{lstlisting}
 
+Wykresy amplitudowy i fazowy:
+
+\begin{lstlisting}
 figure;
 subplot(2, 1, 1)
 plot(f, A);        % wykres amplitudowy
 % figure;
 subplot(2, 1, 2)
 plot(f, F);        % wykres fazowy
+\end{lstlisting}
 
+Odtworzenie sygna³u z danych pozyskanych z transformaty Fouriera i narysowanie wykresu:
+
+\begin{lstlisting}
 odtw = zeros(size(t));
 [maxA, maxI] = maxk(A, 3);
 freq = maxI;
@@ -91,7 +104,9 @@ Sygna³ zosta³ odzyskany z doœæ dobr¹ dok³adnoœci¹, ale nie jest to dok³adnie to 
 \chapter{Optyczny system pomiaru têtna}
 Do pomiaru têtna zosta³ wykorzystany film dostarczony przez prowadz¹cego zajêcia.
 Nastêpnie film zosta³ przerobiony na pojedyncze zdjêcia przy pomocy programu \verb|Adobe Media Encoder|.
-Ca³y program zosta³ przedstawiony poni¿ej:
+Ca³y program zosta³ przedstawiony razem z komentarzami poni¿ej.
+
+Wczytanie zdjêæ:
 
 \begin{lstlisting}
 % Liczba ramek do wczytania (przy 10 sekundach i 30 FPS bêdzie to 300)
@@ -106,7 +121,6 @@ imds = imageDatastore('movie', 'FileExtension', '.jpg');
 % alternatywnie mo¿na za³adowaæ bezpoœrednio plik wideo
 % v = VideoReader('movie.mp4');
 
-
 % wczytanie pierwszych N obrazów i analiza jasnoœci
 for i=1:N
     % wczytujemy obraz i przekszta³camy go do skali szaroœci
@@ -117,7 +131,11 @@ for i=1:N
     % wyznaczamy œredni¹ z ca³ego obrazu
     br(i) = mean(I, 'all');
 end
+\end{lstlisting}
 
+Przetworzenie danych z obrazów:
+
+\begin{lstlisting}
 % dla u³atwienia póŸniejszej analizy od razu mo¿na odj¹æ od sygna³u sk³adow¹ sta³¹
 br = br - mean(br);
 
@@ -141,7 +159,11 @@ F = F(1:L/2+1); % wyciêcie istotnej czêœci spektrum
 
 f_step = Fs/L;     % zmiana czêstotliwoœci
 f = 0:f_step:Fs/2; % oœ czêstotliwoœci do wykresu
+\end{lstlisting}
 
+Narysowanie wykresów i wyznaczenie têtna w uderzeniach na minutê:
+
+\begin{lstlisting}
 figure;
 subplot(2, 1, 1)
 plot(f, A);        % wykres amplitudowy
@@ -166,6 +188,11 @@ bmp = \num{67.2897}
 Jak widaæ têtno przedstawione na rys.~\ref{heart_rate} jest klarownie widoczne i mo¿na by je zmierzyæ nawet zliczaj¹c przejœcia sygna³u przez 0.
 
 Równie¿ têtno zmierzone przy pomocy transformaty Fouriera (równanie~\ref{bmp}) jest w pe³ni normalne, wiêc jest to wynik najpewniej poprawny.
+
+Na rozdzielczoœæ pomiaru sk³ada siê wy³¹cznie liczba klatek na sekundê zarejestrowanych w filmie.
+W tym wypadku film mia³ 30 klatek na sekundê, wiêc pomiar mia³ rozdzielczoœæ 30Hz.
+Aby zwiêkszyæ dok³adnoœæ pomiaru nale¿a³oby nagraæ film w wiêkszej liczbie klatek na sekundê.
+
 
 \begin{figure}
 \centering

@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.24 (MiKTeX 21.12.10) (preloaded format=pdflatex 2022.1.28)  4 MAR 2022 15:25
+This is pdfTeX, Version 3.141592653-2.6-1.40.24 (MiKTeX 21.12.10) (preloaded format=pdflatex 2022.1.28)  4 MAR 2022 17:08
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -988,86 +988,79 @@ Rozdzia\PlPrIeC {\l } 1.
 
 ]
 Rozdzia\PlPrIeC {\l } 2.
-
-Underfull \vbox (badness 1231) has occurred while \output is active []
-
- [3
+[3
 
 ]
 <dane/no_noise.png, id=21, 421.575pt x 316.18124pt>
 File: dane/no_noise.png Graphic file (type png)
 <use dane/no_noise.png>
-Package pdftex.def Info: dane/no_noise.png  used on input line 79.
+Package pdftex.def Info: dane/no_noise.png  used on input line 92.
 (pdftex.def)             Requested size: 455.24408pt x 341.4417pt.
 <dane/with_noise.png, id=22, 421.575pt x 316.18124pt>
 File: dane/with_noise.png Graphic file (type png)
 <use dane/with_noise.png>
-Package pdftex.def Info: dane/with_noise.png  used on input line 86.
+Package pdftex.def Info: dane/with_noise.png  used on input line 99.
 (pdftex.def)             Requested size: 455.24408pt x 341.4417pt.
-
-[4] [5 <./dane/no_noise.png (PNG copy)>] [6 <./dane/with_noise.png (PNG copy)>]
+ [4] [5 <./dane/no_noise.png (PNG copy)>] [6 <./dane/with_noise.png (PNG copy)>
+]
 Rozdzia\PlPrIeC {\l } 3.
 LaTeX Font Info:    Trying to load font information for OT4+cmtt on input line 
-93.
+106.
 (D:\Programy\MiKTeX\tex/latex/polski\ot4cmtt.fd
 File: ot4cmtt.fd 2008/02/24 v1.2.1 Font defs for fonts PL (MW)
 )
-Overfull \hbox (4.6607pt too wide) in paragraph at lines 97--98
+Overfull \hbox (4.6607pt too wide) in paragraph at lines 112--113
 [][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][
-][][][][][][][][][][][][][][][][][][][]  
+][][][][][][][][][][][][][][][][][][]  
  []
 
 LaTeX Font Info:    Trying to load font information for OMS+cmr on input line 1
-13.
+27.
 (D:\Programy\MiKTeX\tex/latex/base\omscmr.fd
 File: omscmr.fd 2019/12/16 v2.5j Standard LaTeX font definitions
 )
 LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <10.95> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 113.
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 127.
 
-Overfull \hbox (83.50153pt too wide) in paragraph at lines 121--122
+Overfull \hbox (83.50153pt too wide) in paragraph at lines 139--140
 [][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][
-][][][][][][][][][][][][][]  
+][][][][][][][][][][][][]  
  []
 
-
-Underfull \vbox (badness 1231) has occurred while \output is active []
-
- [7
+[7
 
 ]
 LaTeX Font Info:    External font `plex10' loaded for size
-(Font)              <10.95> on input line 161.
+(Font)              <10.95> on input line 183.
 LaTeX Font Info:    External font `plex10' loaded for size
-(Font)              <8> on input line 161.
+(Font)              <8> on input line 183.
 LaTeX Font Info:    External font `plex10' loaded for size
-(Font)              <6> on input line 161.
+(Font)              <6> on input line 183.
 <dane/heart_rate.png, id=39, 421.575pt x 316.18124pt>
 File: dane/heart_rate.png Graphic file (type png)
 <use dane/heart_rate.png>
-Package pdftex.def Info: dane/heart_rate.png  used on input line 172.
+Package pdftex.def Info: dane/heart_rate.png  used on input line 199.
 (pdftex.def)             Requested size: 455.24408pt x 341.4417pt.
-)
-[8] [9 <./dane/heart_rate.png (PNG copy)>] (pust_21z_z08_sprawozdanie.aux) ) 
+) [8] [9 <./dane/heart_rate.png (PNG copy)>] (pust_21z_z08_sprawozdanie.aux) ) 
 Here is how much of TeX's memory you used:
  34101 strings out of 478593
  870722 string characters out of 2856798
- 1478852 words of memory out of 3000000
+ 1469840 words of memory out of 3000000
  51729 multiletter control sequences out of 15000+600000
  483937 words of font info for 71 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 84i,8n,89p,759b,1555s stack positions out of 5000i,500n,10000p,200000b,80000s
-{D:
-/Programy/MiKTeX/fonts/enc/dvips/pl/plmi.enc}{D:/Programy/MiKTeX/fonts/enc/dvip
-s/pl/pltt.enc}{D:/Programy/MiKTeX/fonts/enc/dvips/pl/plit.enc} <C:\Users\matip\
-AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\tcrm1095.pk>{D:/Program
-y/MiKTeX/fonts/enc/dvips/pl/plrm.enc}<D:/Programy/MiKTeX/fonts/type1/public/ams
-fonts/cm/cmsy10.pfb><D:/Programy/MiKTeX/fonts/type1/public/pl/plbx10.pfb><D:/Pr
-ogramy/MiKTeX/fonts/type1/public/pl/plbx12.pfb><D:/Programy/MiKTeX/fonts/type1/
-public/pl/plmi10.pfb><D:/Programy/MiKTeX/fonts/type1/public/pl/plr10.pfb><D:/Pr
-ogramy/MiKTeX/fonts/type1/public/pl/plti10.pfb><D:/Programy/MiKTeX/fonts/type1/
-public/pl/pltt10.pfb>
-Output written on pust_21z_z08_sprawozdanie.pdf (10 pages, 163075 bytes).
+ 84i,8n,89p,759b,1553s stack positions out of 5000i,500n,10000p,200000b,80000s
+{
+D:/Programy/MiKTeX/fonts/enc/dvips/pl/plmi.enc}{D:/Programy/MiKTeX/fonts/enc/dv
+ips/pl/pltt.enc}{D:/Programy/MiKTeX/fonts/enc/dvips/pl/plit.enc} <C:\Users\mati
+p\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\tcrm1095.pk>{D:/Progr
+amy/MiKTeX/fonts/enc/dvips/pl/plrm.enc}<D:/Programy/MiKTeX/fonts/type1/public/a
+msfonts/cm/cmsy10.pfb><D:/Programy/MiKTeX/fonts/type1/public/pl/plbx10.pfb><D:/
+Programy/MiKTeX/fonts/type1/public/pl/plbx12.pfb><D:/Programy/MiKTeX/fonts/type
+1/public/pl/plmi10.pfb><D:/Programy/MiKTeX/fonts/type1/public/pl/plr10.pfb><D:/
+Programy/MiKTeX/fonts/type1/public/pl/plti10.pfb><D:/Programy/MiKTeX/fonts/type
+1/public/pl/pltt10.pfb>
+Output written on pust_21z_z08_sprawozdanie.pdf (10 pages, 163339 bytes).
 PDF statistics:
  86 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
