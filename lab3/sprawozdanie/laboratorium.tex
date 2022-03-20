@@ -1,0 +1,141 @@
+% !TEX encoding = cp1250
+
+\chapter{Odczytywanie sygna³u z obrazów}
+Poni¿ej znajduje siê kod odpowiedzialny za odczytywanie sygna³u z obrazów:
+
+\begin{lstlisting}[style=custommatlab]
+% Liczba ramek do wczytania (przy 10 sekundach i 30 FPS bêdzie to 300)
+N = 321;
+
+% wektor jasnoœci
+br = zeros(1, N);
+
+% lista obrazów do analizy
+imds = imageDatastore('../lab1/movie', 'FileExtension', '.jpg');
+
+% wczytanie pierwszych N obrazów i analiza jasnoœci
+for i=1:N
+% wczytujemy obraz i przekszta³camy go do skali szaroœci
+I = rgb2gray(imread(imds.Files{i}));
+
+% wyznaczamy œredni¹ z ca³ego obrazu
+br(i) = mean(I, 'all');
+end
+
+% dla u³atwienia póŸniejszej analizy od razu mo¿na odj¹æ od sygna³u sk³adow¹ sta³¹
+br = br - mean(br);
+\end{lstlisting}
+
+\chapter{Odszumianie sygna³u}
+Czêœæ programu do odszumiania sygna³u wybranym filtrem zosta³a umieszczona poni¿ej:
+
+\begin{lstlisting}[style=custommatlab]
+% filtrowanie sygna³u
+f3 = ones(1,3) / 3;
+c3 = conv(br, f3, 'same');
+
+f15 = ones(1,15) / 15;
+c15 = conv(br, f15, 'same');
+
+g3 = fspecial('gaussian', [1,  3], 1);
+cg3 = conv(br, g3, 'same');
+
+g15 = fspecial('gaussian', [1, 15], 3);
+cg15 = conv(br, g15, 'same');
+
+% dodaj filrowanie
+br = cg15;
+\end{lstlisting}
+
+\chapter{Znajdowanie têtna autokorelacj¹}
+Pierwszym etapem by³o zastosowanie autokorelacji i odfiltrowanie z niej jedynie wa¿nych elementów.
+Nastêpnie znalezione zosta³y maksima lokalne autokorelacji.
+To w nich sygna³ najbardziej pokrywa siê sam ze sob¹, ale po przesuniêciu.
+Zatem pierwsze takie maksimum lokalne bêdzie znajdowa³o siê w miejscu gdzie wystêpuje przesuniêcie o jedn¹ fazê.
+
+Zatem w programie znajduj¹cym siê poni¿ej dokonano w³aœnie tego, znelziono pierwsze maksimum lokalne autokorelacji i wyci¹gniêto z tego informacjê o czêstotliwoœci sygna³u, czyli têtnie.
+
+\begin{lstlisting}[style=custommatlab]
+[r1, lags] = xcorr(br);
+% wyciêcie jedynie dodatnich przesuniêæ
+r1 = r1(lags >= 0);
+lags = lags(lags >= 0);
+
+[pks, loc] = findpeaks(r1, "MinPeakDistance", 10, "MinPeakProminence", 20);
+fs = 30;
+
+% przesuniêcie w sekundach
+lag_s = lags(loc(1)) * 1/fs;
+
+% czêstotliwoœæ bazowa
+freq = 1/lag_s;
+bmp = freq * 60
+
+figure;
+subplot(2, 1, 1);
+plot(br);
+subplot(2, 1, 2);
+plot(r1);
+\end{lstlisting}
+
+\chapter{Wyniki i wnioski}
+Na rys~\ref{bez_filtra} - \ref{cg15} pokazane zosta³y sygna³y zastosowane do autkorelacji i wyniki autokorelacji.
+
+W pierwszej kolejnoœci przeprowadzono eksperyment bez zadnego filtra i uzyskano wynik przedstawiony na rys.~\ref{bez_filtra}.
+W tym eksperymencie uzyskane têpno wynios³o: \num{69.2308}.
+
+Nastêpnie sygna³ oryginalny poddano filtracji filtrem uœredniaj¹cym o d³ugoœci 3 czego wyniki mo¿na zobaczyæ na rys.~\ref{c3}.
+Zmierzone têtno wynios³o \num{69.2308}.
+
+Kolejnym eksperymentem by³o poddanie sygna³u filtraci filtrerem uœredniaj¹cym o d³ugoœci 15.
+Wyniki tych dzia³añ zosta³y przedstawione na rys.~\ref{c15}.
+Prze³o¿y³o siê to na têtno \num{66.6667}.
+
+Potem zastosowano filtr Gaussa o d³ugoœci 3 i uzyskano wyniki jak na rys.\ref{cg3}.
+Tym razek têtno zmierzone wynios³o \num{69.2308}.
+
+Ostatnim eksperymentem by³o zastosowanie filtra Gaussa, ale tym razem o d³ugoœci 15.
+Uzyskane wyniki zosta³y przedstawione na rys.~\ref{cg15}, a têtno zosta³o zmierzone na poziomie \num{69.2308}.
+\\
+
+\begin{figure}
+\centering
+\includegraphics[width=1\textwidth]{dane/bez_filtra}
+\caption{Na górze: sygna³ oryginalny uzyskany ze zdjêæ \\ Na dole: autokorelacja uzyskana z tego sygna³u}
+\label{bez_filtra}
+\end{figure}
+
+\begin{figure}
+	\centering
+	\includegraphics[width=1\textwidth]{dane/c3}
+	\caption{Na górze: sygna³ uzyskany po zastosowaniu filtra uœredniaj¹cego o d³ugoœci 3 \\ Na dole: autokorelacja uzyskana z tego sygna³u}
+	\label{c3}
+\end{figure}
+
+\begin{figure}
+	\centering
+	\includegraphics[width=1\textwidth]{dane/c15}
+	\caption{Na górze: sygna³ uzyskany po zastosowaniu filtra uœredniaj¹cego o d³ugoœci 15 \\ Na dole: autokorelacja uzyskana z tego sygna³u}
+	\label{c15}
+\end{figure}
+
+\begin{figure}
+	\centering
+	\includegraphics[width=1\textwidth]{dane/cg3}
+	\caption{Na górze: sygna³ uzyskany po zastosowaniu filtra Gaussa o d³ugoœci 3 \\ Na dole: autokorelacja uzyskana z tego sygna³u}
+	\label{cg3}
+\end{figure}
+
+\begin{figure}
+	\centering
+	\includegraphics[width=1\textwidth]{dane/cg15}
+	\caption{Na górze: sygna³ uzyskany po zastosowaniu filtra Gaussa o d³ugoœci 15 \\ Na dole: autokorelacja uzyskana z tego sygna³u}
+	\label{cg15}
+\end{figure}
+
+Jak widaæ wyniki wszystkich tych metod s¹ bardzo podobne, a tak naprawdê, z jednym wyj¹tkiem, takie same je¿eli chodzi o poziom dok³adnoœci zmierzonego têtna.
+Same przebiegi z kolei s¹ dla krótszych filtrów ju¿ zdecydowanie ³adniejsze ni¿ dla braku ich braku, ale widaæ jeszcze pewne niedoskona³oœci.
+Mog¹ one jednak ju¿ wynikaæ z niedok³adnie wykonanego pomiaru, a niekoniecznie z samego szumu pomiarowego generowanego przez sprzêt.
+Za to d³ugi filtr, zarówno uœredniaj¹cy jak i Gaussa, bardzo mocno przybli¿aj¹ sygna³ do sinusoidy bez mniejszych zniekszta³ceñ, ale powoduje to te¿ czêœciow¹ utratê szczegó³owych informacji o mikro-zmianach.
+Dlatego zreszt¹ te¿ têtno zmierzone z sygna³u przepuszczonego przez filtr uœredniaj¹cy o d³ugoœci 15 (rys.~\ref{c15}) ró¿ni siê od pozosta³ych.
+Sygna³ zosta³ dostatecznie mocno zniekszta³cony, ¿e wynik siê zmieni³.
