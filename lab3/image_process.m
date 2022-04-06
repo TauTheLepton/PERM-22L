@@ -1,3 +1,4 @@
+tic;
 %% wczytywanie obrazu
 % Liczba ramek do wczytania (przy 10 sekundach i 30 FPS będzie to 300)
 N = 321;
@@ -60,3 +61,4 @@ subplot(2, 1, 1);
 plot(br);
 subplot(2, 1, 2);
 plot(r1);
+toc;

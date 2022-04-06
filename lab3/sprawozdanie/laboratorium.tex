@@ -79,6 +79,8 @@ plot(r1);
 \end{lstlisting}
 
 \chapter{Wyniki i wnioski}
+
+\section{Wyniki}
 Na rys~\ref{bez_filtra} - \ref{cg15} pokazane zosta³y sygna³y zastosowane do autkorelacji i wyniki autokorelacji.
 
 W pierwszej kolejnoœci przeprowadzono eksperyment bez zadnego filtra i uzyskano wynik przedstawiony na rys.~\ref{bez_filtra}.
@@ -96,7 +98,6 @@ Tym razek têtno zmierzone wynios³o \num{69.2308}.
 
 Ostatnim eksperymentem by³o zastosowanie filtra Gaussa, ale tym razem o d³ugoœci 15.
 Uzyskane wyniki zosta³y przedstawione na rys.~\ref{cg15}, a têtno zosta³o zmierzone na poziomie \num{69.2308}.
-\\
 
 \begin{figure}
 \centering
@@ -133,6 +134,17 @@ Uzyskane wyniki zosta³y przedstawione na rys.~\ref{cg15}, a têtno zosta³o zmierz
 	\label{cg15}
 \end{figure}
 
+\section{Rozdzielczoœæ}
+Na dok³adnoœæ uzyskanych wyników wp³ywa rodzielczoœæ samego procesu autokorelacji.
+Znajdowanie kolejnych wyników autokorelacji odbywa siê poprzez przesuwanie kopii syga³u krok po kroku i sprawdzanie podobieñstwa z sygna³em originalnym.
+Tak wiêc rozdzielczoœæ zale¿y od wiekoœci kroku procesu autokorelacji.
+Im ten krok jest mniejszy tym rozdzilczoœc wyniku bêdzie wiêksza.
+
+W przypadku tego zadania i jego rozwi¹zania zosta³a zastosowana funkcja \verb|xcorr| pakietu \verb|MATLAB|.
+Jeden krok mia³ d³ugoœæ $\frac{1}{30} \approx \num{0.0333}$, co oznacza, ¿e z tak¹ dok³adnoœci¹ zaosta³a zmierzona czêstotliwoœæ w Hz.
+Na têtno mierzone w uderzeniach na minutê prze³o¿y³o siê to na dok³adnoœæ do $\frac{60}{30} = \num{2}$ bmp.
+
+\section{Wnioski}
 Jak widaæ wyniki wszystkich tych metod s¹ bardzo podobne, a tak naprawdê, z jednym wyj¹tkiem, takie same je¿eli chodzi o poziom dok³adnoœci zmierzonego têtna.
 Same przebiegi z kolei s¹ dla krótszych filtrów ju¿ zdecydowanie ³adniejsze ni¿ dla braku ich braku, ale widaæ jeszcze pewne niedoskona³oœci.
 Mog¹ one jednak ju¿ wynikaæ z niedok³adnie wykonanego pomiaru, a niekoniecznie z samego szumu pomiarowego generowanego przez sprzêt.
