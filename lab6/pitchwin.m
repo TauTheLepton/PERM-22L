@@ -12,7 +12,7 @@ for i=1 : win : length(x)-win
     [pks, loc] = findpeaks(c, "MinPeakProminence", 0.2, "MinPeakWidth", 3);
     [peak, idx] = max(pks);
     if size(lags(loc(idx))) == [1 1]
-        f0(i:i+win) = lags(loc(idx));
+        f0(i:i+win) = fs/lags(loc(idx));
 %         disp("DOBRZE");
 %     else
 %         disp("ZLE");
