@@ -14,6 +14,7 @@
 % train_ids = [1 2 4 5 7 8 10 11];
 % test_ids = [3 6 9 12];
 clear;
+close all;
 [data, fs, train_ids, train_lbl, test_ids, test_lbl] = load_data();
 
 tmp = extract(data{1}, fs);
@@ -31,28 +32,39 @@ disp(append("Geom: ", string(mean(predictions == test_lbl))))
 [predictions, dist] = predict_my(feats(:, test_ids), model, model_labels);
 disp(append("My: ", string(mean(predictions == test_lbl))))
 
-clf;
-hold on;
-plot(dist);
-plot((predictions == test_lbl)*0.2 + 0.5)
+model = fit_tree(feats(:,train_ids), train_lbl);
+predictions = predict_tree(feats(:, test_ids), model);
+disp(append("Tree: ", string(mean(predictions == test_lbl))))
+
+% hold on;
+% plot(dist);
+% plot((predictions == test_lbl)*0.2 + 0.5)
 
 %% stream
-% stream = audioread('data/stream.wav');
-% 
-% len = round(0.8 * fs);
-% overlap = round(0.1 * fs);
-% 
-% predictions = zeros(length(stream), 1);
-% dist = zeros(length(stream), 1);
-% 
-% for i = 1 : overlap : length(stream) - len
-%     r = stream(k:k+len);
-%     r = r / max(r);
-%     f = extract(r, fs);
+stream = audioread('stream.wav');
+
+len = round(0.8 * fs);
+overlap = round(0.2 * fs);
+
+predictions = zeros(length(stream), 1);
+dist = zeros(length(stream), 1);
+
+for k = 1:overlap:length(stream)-len
+    r = stream(k:k+len);
+    r = r / max(r);
+    f = extract(r, fs);
 %     [predictions(k:k+len), dist(k:k+len)] = predict_geom(f, model, model_labels);
-% end
-% 
-% predictions(dist > 0.3) = 0; % odfiltrowanie slabego dopasowania
+    predictions(k:k+len) = predict_tree(f, model);
+end
+
+correct = load("labels.txt");
+figure;
+hold on;
+plot(predictions);
+plot(correct);
+legend('prediction', 'correct');
+
+jaccard(predictions, correct)
 
 %% funkcje
 function [model, labels_new] = fit_geom(feats, labels)
@@ -86,6 +98,15 @@ end
 labels_new = labels_new';
 % [dist, min_idx] = min(dm, [], 2);
 % labels_new = labels(min_idx);
+end
+
+function model = fit_tree(feats, labels)
+model = TreeBagger(200, feats', labels, 'Method','classification');
+end
+
+function labels_new = predict_tree(feats, model)
+labels_new = model.predict(feats')';
+labels_new = str2double(labels_new);
 end
 
 function f = extract(x, fs)
