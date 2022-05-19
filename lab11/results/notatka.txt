@@ -1,0 +1,17 @@
+opisy kolorów
+
+zdjęcie 1:
+- las -> czerwony
+- zabudowania -> jasny niebieski
+- pole -> zółty, ciemny niebieski
+
+zdjęcie 2:
+- las -> ciemny niebieski, pomarańczowy
+- zabudowania -> jasny zielony
+- pole -> oba jasne niebieskie, żółty
+
+zdjęcie 3:
+niestety nie udało się wydzielić rzeki jako oddzielnego elementu
+- las -> bardzo ciemny niebieski, czerwony
+- zabudowania -> pomarańczowy
+- pole -> wszystkie pozostałe kolory
